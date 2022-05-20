@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	id="WebApp_ID" version="4.0">
+	<display-name>whoAmI</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<servlet>
+		<servlet-name>ExpertFrontController</servlet-name>
+		<servlet-class>com.whoAmI.managerExpert.ExpertFrontController</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ExpertFrontController</servlet-name>
+		<url-pattern>*.me</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>TestInfoFontController</servlet-name>
+		<servlet-class>com.whoAmI.managerMbti.TestInfoFontController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TestInfoFontController</servlet-name>
+		<url-pattern>*.ns</url-pattern>
+	</servlet-mapping>
+
+	<!--현진용 -->
+	<servlet>
+		<servlet-name>UserFrontController</servlet-name>
+		<servlet-class>com.whoAmI.user.UserFrontController</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>UserFrontController</servlet-name>
+		<url-pattern>*.user</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AdminFrontController</servlet-name>
+		<servlet-class>com.whoAmI.admin.AdminFrontController</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AdminFrontController</servlet-name>
+		<url-pattern> *.mg </url-pattern>
+	</servlet-mapping>
+
+	<!-- 동영이꺼 -->
+	<servlet>
+		<servlet-name>WorryFrontController</servlet-name>
+		<servlet-class>com.whoAmI.worry.WorryFrontController</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>WorryFrontController</servlet-name>
+		<url-pattern>*.bo</url-pattern>
+	</servlet-mapping>
+
+	<!-- 공도윤 -->
+	<servlet>
+		<servlet-name>MyPageFrontController</servlet-name>
+		<servlet-class>com.whoAmI.userMyPage.MyPageFrontController</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>MyPageFrontController</servlet-name>
+		<url-pattern>*.dy</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+    	<servlet-name>ExpertPageFrontController</servlet-name>
+  		<servlet-class>com.whoAmI.expertPage.ExpertPageFrontController</servlet-class>
+ 	</servlet>
+ 	
+  	<servlet-mapping>
+  		<servlet-name>ExpertPageFrontController</servlet-name>
+  		<url-pattern>*.ddy</url-pattern>
+  	</servlet-mapping>
+	
+	<!-- 정화 -->
+	<servlet>
+  		<servlet-name>ManagerFrontContraller</servlet-name>
+  		<servlet-class>com.whoAmI.manager.ManagerFrontContraller</servlet-class>
+  	</servlet>
+  
+  	<servlet-mapping>
+  		<servlet-name>ManagerFrontContraller</servlet-name>
+  		<url-pattern>*.ma</url-pattern>
+  	</servlet-mapping>
+  	
+  <servlet>
+  	<servlet-name>DiaryFrontContraller</servlet-name>
+  	<servlet-class>com.whoAmI.diary.DiaryFrontContraller</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>DiaryFrontContraller</servlet-name>
+  	<url-pattern>*.di</url-pattern>
+  </servlet-mapping>
+	
+	
+</web-app>

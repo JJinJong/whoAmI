@@ -1,0 +1,79 @@
+/**
+ * 
+ */
+
+/* 알람 보이기 버튼 */
+var $alarm_button = $($('.header_nav_icon img')[0]);
+/* 알람창 */
+var $alarm_list = $('.Notifications__NotificationsWrapper-sc-1jfsc1j-0');
+/* 알람 닫기 버튼 */
+var $alarm_close = $('.notifications__header__close');
+
+var check = false;
+
+/* 알람 열기 기능 */
+$alarm_button.click(function () {
+	if(check == false){
+		$alarm_list.css("left", "0");
+		$alarm_list.css("opacity", "1");
+		check = true;
+	}else{
+		$alarm_list.css("left", "-350px");
+		$alarm_list.css("opacity", "0");
+		check = false;
+	}
+});
+
+
+
+/* 알람 닫기 기능 */
+$alarm_close.click(function () {
+	$alarm_list.css("left", "-350px");
+	$alarm_list.css("opacity", "0");
+})
+
+// 고민/사연 oncilck
+function sibalSend(){
+	location.href = contextPath + "/worry/ListOK.bo";
+};
+
+function consultSend() {
+	location.href = contextPath + "/managerMbti/TestInfoMainList.ns";
+};
+
+function expertSend() {
+	location.href = contextPath + "/expert/ExpertList.me";
+};
+
+// 감정일기 클릭
+function diary() {
+	location.href = contextPath + "/diary/DiaryListOk.di";
+};
+
+
+
+//글쓰기
+
+function writesend(){
+	var uid = '<%=(Integer)session.getAttribute("userNumber")%>';
+	console.log(uid);
+if(uid != ""){
+	alert("로그인 후 사용하실 수 있습니다.")
+}else{
+	location.href=contextPath +"/app/worryStroy/worrypage.jsp";
+}
+};
+
+/*// 카테고리 색깔 변경
+var $categoryBtns = $('.header_nav  button');
+
+console.log($categoryBtns);
+
+$each($categoryBtns, function(index, item) {
+	$(item).click(function() {
+		$(item).parent.removeCalss('category_on');
+			$(this).addClass('category_on');
+	});
+});*/
+
+

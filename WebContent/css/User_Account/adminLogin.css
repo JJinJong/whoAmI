@@ -1,0 +1,137 @@
+@charset "UTF-8";
+*{
+   box-sizing: border-box;
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif' !important;
+    letter-spacing: -0.7px;
+}
+
+/*관리자 페이지 로그인  */
+* {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+}
+
+.wrap {
+	height: 100%;
+	width: 100%;
+	background-color: #999;
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.form-wrap {
+	width: 380px;
+	height: 480px;
+	position: relative;
+	background: #fff;
+	padding: 5px;
+	overflow: hidden;
+	margin-top: -152px;
+}
+
+.text {
+	text-align: center;
+	font-size: 29px;
+}
+
+.button-wrap {
+	margin: 35px auto;
+	position: relative;
+	padding-top: 6px;
+}
+
+.input-group {
+	top: 140px;
+	position: absolute;
+	width: 280px;
+	transition: .5s;
+}
+
+.input-field {
+	width: 100%;
+	padding: 10px 0;
+	margin: 5px 0;
+	border: none;
+	border-bottom: 1px solid #999;
+	outline: none;
+	background: transparent;
+}
+
+.submit {
+	width: 64%;
+	padding: 10px 30px;
+	cursor: pointer;
+	display: block;
+	margin: auto;
+	border: 0;
+	outline: none;
+	margin-top: 220px;
+	background-color: #2b2e4a;
+	color: white;
+}
+
+.submit_bottom {
+	width: 64%;
+	padding: 10px 30px;
+	cursor: pointer;
+	display: block;
+	margin: -60px 69px 0px;
+	border: 0;
+	outline: none;
+	margin-top: -40px;
+	background-color: #2b2e4a;
+	color: white;
+}
+
+.checkbox {
+	margin: 30px 10px 30px 0;
+}
+
+span {
+	color: #777;
+	font-size: 12px;
+	bottom: 68px;
+	position: absolute;
+}
+
+.form {
+	left: 50px;
+}
+
+/* .submit:hover {
+	background-color: #777;
+} */
+.position {
+	display: block;
+}
+
+.Text {
+	text-align-last: center;
+	margin-top: 25px;
+}
+
+.dHVBa-D::before, .dHVBa-D::after {
+	border-top: 1px solid rgb(204, 204, 204);
+	content: "";
+	display: table-cell;
+	position: relative;
+	top: 0.8em;
+	width: 42%;
+	margin-top: 360px;
+}
+
+.dHVBa-D {
+	display: table;
+	font-size: 16px;
+	line-height: 24px;
+	letter-spacing: 2px;
+	margin: 340px auto 1em;
+	color: rgb(127, 127, 127);
+	position: relative;
+	text-align: center;
+	width: 85%;
+	margin-top: 90px;
+}

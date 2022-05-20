@@ -1,0 +1,28 @@
+package com.whoAmI.userMyPage;
+
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.whoAmI.action.Action;
+import com.whoAmI.action.ActionForward;
+import com.whoAmI.userMyPage.dao.UserListDAO;
+
+public class UserDeleteOk implements Action {
+
+	@Override
+	public ActionForward execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		int userNumber = Integer.parseInt(req.getParameter("userNumber"));
+		// TODO Auto-generated method stub
+		ActionForward af = new ActionForward();
+		UserListDAO dao = new UserListDAO();
+
+		dao.delete(userNumber);
+		af.setRedirect(true);
+		af.setPath(req.getContextPath() + "/managerMbti/TestInfoListOk.ns");
+
+		return af;
+	}
+
+}

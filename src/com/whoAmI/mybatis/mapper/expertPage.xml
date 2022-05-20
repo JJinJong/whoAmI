@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http//mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ExpertPage">
+<!-- 회원 정보 조회 -->
+   <select id="expertInfo" parameterType="_int" resultType="UserVO">
+      select userNumber, userEmail, userPw, userName, userNickname, userGender, userAddress, userBirth, userHP, userStatus 
+      from tbl_user where userNumber = #{userNumber}         
+   </select>
+   
+   <!-- 전문가 정보 수정 -->
+   <update id="expertInfoUpdate" parameterType="UserVO">
+  		update tbl_user
+		set userPw=#{userPw}, userHP=#{userHP}
+		where userNumber = #{userNumber}
+   </update>
+   
+   <!-- 심리상담 목록 -->
+    <select id="expertConsultDetail" parameterType="_int" resultType="ConsultPaymentDetailDTO">
+     select m.userName, cpd.consultType, cpd.consultTitle, cpd.consultStatus, t.managerName, m.userHP, 
+     		cpd.consultPaymentDetailNumber
+      from tbl_ConsultPaymentDetail cpd right join tbl_user m
+      on cpd.userNumber = m.userNumber
+      right join tbl_managerProfile t 
+      on cpd.userNumberExpert = t.userNumberExpert 
+      where t.userNumberExpert = #{userNumberExpert}
+   </select>
+   
+   <!-- 현재 비밀번호 검사 -->
+   <select id="checkPw" parameterType="string" resultType="_int">
+      select count(userPw) from tbl_user 
+      where userPw = #{userPw}
+   </select>
+   
+	<!-- 로그인시 비밀번호 비밀번호 확인 -->
+	<select id="expertCheckPw" parameterType="string" resultType="_int">
+      select count(userPw) from tbl_user 
+      where userPw = #{userPw}
+   </select>
+   
+   <!-- 진행중 업데이트 -->
+   <update id="consultGoUpdate" parameterType="_int">
+  		UPDATE tbl_consultpaymentdetail
+		SET consultStatus='1'
+		WHERE consultPaymentDetailNumber=#{consultPaymentDetailNumber}
+   </update>
+   
+   <!-- 상담완료 업데이트 -->
+   <update id="consultEndUpdate" parameterType="_int">
+  		UPDATE tbl_consultpaymentdetail
+		SET consultStatus='2'
+		WHERE consultPaymentDetailNumber=#{consultPaymentDetailNumber}
+   </update>
+   
+   <!-- 프로필넘버로 사용자 번호와 전문가 번호 가져오기 -->
+	<select id="selectNumbers" parameterType="_int" resultType="ConsultReviewVO"> 
+		select userNumber, userNumberExpert, consultPaymentDetailNumber from tbl_consultPaymentDetail 
+      where consultPaymentDetailNumber=#{consultPaymentDetailNumber} 
+	</select>
+	
+	<insert id="insertNumbers" parameterType="ConsultReviewVO">
+		INSERT INTO tbl_consultreview
+		(consultReviewContent, consultReviewDate, userNumberExpert, userNumber, consultPaymentDetailNumber)
+		VALUES('리뷰를 작성해 주세요', now(), #{userNumberExpert}, #{userNumber}, #{consultPaymentDetailNumber})
+	</insert> 
+	
+	<!-- 전문가 댓글 가져오기 -->
+	<select id="selectAllComment" parameterType="_int" resultType="WorryCommentManagerDTO">
+    SELECT m.worryCommentManagerNumber, m.worryCommentManagerContent, m.managerNumberDate, m.worryNumber, t.userNumberExpert, t.managerName 
+	FROM tbl_worrycommentmanager m left join tbl_managerProfile t
+	on  m.userNumberExpert = t.userNumberExpert
+	WHERE t.userNumberExpert = #{userNumberExpert}
+		order by 1   
+   </select> 
+   
+   <!-- 댓글 하나 가져오기 -->
+   <select id="selectComment" parameterType="_int" resultType="WorryCommentManagerDTO">
+    SELECT worryCommentManagerNumber, worryCommentManagerContent, managerNumberDate, worryNumber, userNumberExpert
+	FROM tbl_worrycommentmanager
+	where worryCommentManagerNumber = #{worryCommentManagerNumber}
+   </select> 
+   
+   <!-- 댓글 수정 -->
+	<update id="updateComment" parameterType="WorryCommentManagerDTO">
+		update tbl_worryCommentManager
+		set worryCommentManagerContent = #{worryCommentManagerContent}
+		where worryCommentManagerNumber = #{worryCommentManagerNumber}
+	</update>
+	
+	<!-- 댓글 삭제  -->
+     <delete id="deleteComment" parameterType="_int">
+		delete from tbl_worryCommentManager where worryCommentManagerNumber = #{worryCommentManagerNumber}
+	</delete>
+   
+</mapper>

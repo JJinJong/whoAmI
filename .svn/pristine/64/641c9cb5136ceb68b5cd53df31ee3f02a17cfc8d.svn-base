@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http//mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Admin">
+	<!-- 아이디 중복검사 -->
+	<select id="checkId" parameterType="string" resultType="_int">
+		select count(managerId) from tbl_manager
+		where managerId = #{managerId}
+		<!--입력받은 아이디와 비교 -->
+	</select>
+
+	<!-- 회원 가입 -->
+	<insert id="join" parameterType="AdminVO">
+		INSERT INTO whoami.tbl_manager
+		(managerName, managerId, managerPw, managerStatus)
+		VALUES(#{managerName}, #{managerId}, #{managerPw}, #{managerStatus});
+	</insert>
+
+	<!-- 로그인 -->
+	 <select id="login" parameterType="map" resultType="_int">
+		select
+		managerNumber from tbl_manager
+		where managerId=#{managerId} and
+		managerPw=#{managerPw}
+	</select> 
+	
+	<!--관리자 이름  표시-->
+	<select id="header" parameterType="string" resultType="String">
+		select
+		managerId from tbl_manager 
+		where managerId=#{managerId} 
+	</select>
+	
+
+	<!-- 회원 정보 조회 -->
+	<!-- <select id="getInfo" parameterType="_int" resultType="userVO">
+		select
+		memberId, memberPw, memberName, memberAge, memberGender, memberEmail,
+		memberZipcode, memberAddress, memberAddressDetail
+		from tbl_member where
+		memberNumber = #{memberNumber}
+	</select> -->
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,45 @@
+package com.whoAmI.admin.dao;
+
+import java.util.Map;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
+import com.whoAmI.admin.vo.AdminVO;
+import com.whoAmI.mybatis.config.MyBatisConfig;
+
+public class AdminDAO {
+	SqlSessionFactory sqlSessionFactory = MyBatisConfig.getSqlsessoinFactory();
+	SqlSession sqlSession;
+
+	public AdminDAO() {
+		sqlSession = sqlSessionFactory.openSession(true);
+	}
+
+	// 아이디 중복검사
+	public boolean checkId(String managerId) {// 아이디가 존재하면 1 true, 없으면 0 false
+		return (Integer) sqlSession.selectOne("Admin.checkId", managerId) == 1;
+	}
+
+	// 회원가입
+	public void join(AdminVO admin) {
+		sqlSession.insert("Admin.join", admin);
+	}
+
+	// 로그인
+	public int login(Map<String, String> loginMap) {
+		int managerNumber = 0;
+		try {
+			managerNumber = sqlSession.selectOne("Admin.login", loginMap);
+		} catch (Exception e) {
+			;
+		}
+		return managerNumber;
+	}
+
+	// 회원정보 상단 표시
+	public String header(String managerId) {
+		return sqlSession.selectOne("Admin.header", managerId);
+	}
+
+}

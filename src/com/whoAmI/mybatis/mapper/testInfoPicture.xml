@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http//mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TestInfoPicture">
+	<!-- 첨부파일 추가 -->
+	<insert id="insert" parameterType="TestInfoPictureVO">
+		insert into tbl_testInfoPicture (testInfoPicture, testInfoPictureSumnailNameOrignal, testInfoPicturePosterNameOrignal,testInfoNumber, testInfoPicturePoster) 
+		values(#{testInfoPicture}, #{testInfoPictureSumnailNameOrignal}, #{testInfoPicturePosterNameOrignal}, #{testInfoNumber}, #{testInfoPicturePoster})
+	</insert>
+	
+	<!-- 첨부파일 삭제 -->
+	<delete id="delete" parameterType="_int">
+		delete from tbl_testInfoPicture where testInfoNumber = #{testInfoNumber}
+	</delete>
+	<!-- 첨부파일 가져오기 -->
+	<select id="select" parameterType="_int" resultType="TestInfoPictureVO">
+		select  testInfoPictureSumnailNameOrignal, testInfoPicturePosterNameOrignal 
+		from tbl_testInfoPicture 
+		where testInfoNumber = #{testInfoNumber}
+	</select>
+	<!-- 첨부파일 전부가져오기 -->
+	<select id="selectAll" resultType="TestInfoPictureVO">
+		select  testInfoPictureSumnailNameOrignal, testInfoPicturePosterNameOrignal 
+		from tbl_testInfoPicture where testInfoNumber = #{testInfoNumber}
+		order by 1
+	</select>
+	
+	<select id="selectManagerNumber" parameterType="_int" resultType="_int">
+		select managerNumber from tbl_testinfo
+		where testInfoNumber = #{testInfoNumber}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

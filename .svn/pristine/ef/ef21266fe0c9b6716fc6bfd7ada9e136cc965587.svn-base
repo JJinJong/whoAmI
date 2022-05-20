@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http//mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Expert">
+		<!-- 유저스테이터스 -->
+		<select	 id="selectStatus" parameterType="map" resultType="_int">
+			select userStatus from tbl_user
+			where userEmail = #{userEmail} and userPw = #{userPw}		
+		</select>
+
+		<!-- 전문가 회원 가입 -->
+	<insert id="ExpertJoin" parameterType="UserVO">
+		INSERT INTO whoami.tbl_user
+		(
+			userEmail, userPw, userName, userGender, userHP, userStatus
+		)
+		VALUES
+		(
+			#{userEmail}, #{userPw}, #{userName}, #{userGender}, 
+			#{userHP}, '1'
+		)
+	</insert>
+
+		<!-- 전문가 프로필 작성 -->
+	<insert id="insert" parameterType="expertProfileVO">
+		INSERT INTO tbl_managerprofile
+		(
+			managerName, managerPictureNameOrignal, managerProfileName, managerIntroduce, 
+			managerRank, managerCareer, managerDegree, managerContent1, managerContent2, 
+			managerContent3, managerconsultText, managerconsultVoice, managerconsultMeet, 
+			managerconsultDate, userNumberExpert
+		)
+		VALUES
+		(
+			#{managerName}, #{managerPictureNameOrignal}, #{managerProfileName}, 
+			#{managerIntroduce}, #{managerRank}, #{managerCareer}, #{managerDegree}, 
+			#{managerContent1}, #{managerContent2}, #{managerContent3}, 
+			#{managerconsultText}, #{managerconsultVoice}, #{managerconsultMeet}, 
+			now(), #{userNumberExpert}
+		)
+	</insert>
+
+	<!-- 프로필 가져오기 by 프로필 번호-->
+	<select id="selectDetail" parameterType="_int" resultType="expertProfileVO">
+		select managerProfileNumber, managerName, managerPictureNameOrignal, 
+		managerProfileName, managerIntroduce, managerRank, managerCareer, 
+		managerDegree, managerContent1, managerContent2, managerContent3, 
+		managerconsultText, managerconsultVoice, managerconsultMeet, managerconsultDate, userNumberExpert
+		from tbl_managerprofile 
+		where managerProfileNumber = #{managerProfileNumber}
+	</select>
+
+	<!-- 프로필 리스트 -->
+	<select id="selectProfiles" resultType="expertProfileVO">
+		SELECT managerProfileNumber, managerName, managerPictureNameOrignal, 
+		managerProfileName, managerIntroduce, managerRank, managerCareer, 
+		managerDegree, managerContent1, managerContent2, managerContent3, 
+		managerconsultText, managerconsultVoice, managerconsultMeet, managerconsultDate, userNumberExpert
+		from tbl_managerprofile
+		order by 1 desc
+	</select>
+	
+	<!-- 프로필 리스트 3개 랜덤 -->
+	<select id="selectRandomProfiles" resultType="expertProfileVO">
+		SELECT managerProfileNumber, managerName, managerPictureNameOrignal, 
+		managerProfileName, managerIntroduce, managerRank, managerCareer, 
+		managerDegree, managerContent1, managerContent2, managerContent3, 
+		managerconsultText, managerconsultVoice, managerconsultMeet, managerconsultDate, userNumberExpert
+		from tbl_managerprofile
+		order by rand() limit 3
+	</select>
+	
+	
+	<!-- 프로필 리스트 체크된 목록 -->
+	<select id="selectProfilesFiltered" parameterType="map" resultType="expertProfileVO">
+		SELECT m.*, u.userGender 
+		from tbl_managerprofile m join tbl_user u
+		on m.userNumberExpert = u.userNumber
+		where 1=1
+		    <if test="consultText != null">
+		        and managerconsultText Like '%채팅%'
+		    </if>
+		    <if test="consultVoice != null">
+		        and managerconsultVoice Like '%전화%'
+		    </if>
+		    <if test="consultMeet != null">
+		        and managerconsultMeet Like '%대면%'
+		    </if>
+		    <if test="genderCheck = true">
+		    	 <if test="consultFeMale != null">
+		        and userGender Like '%여자%'
+		    	</if>
+		    	<if test="consultMale != null">
+		        	and userGender Like '%남자%'
+		    	</if>
+		    </if>
+  		order by 1 desc
+	</select>
+	
+	<!-- 프로필 리뷰 가져오기 -->
+	<select id="selectReviewAll" parameterType="map" resultType="consultReviewDTO">
+		select c.consultReviewNumber, c.consultReviewContent, c.consultReviewDate, 
+		c.userNumberExpert, c.userNumber, pd.consultType, pd.consultTitle 
+		from tbl_consultreview c join tbl_consultPaymentDetail pd
+		on c.consultPaymentDetailNumber = pd.consultPaymentDetailNumber
+		where c.userNumberExpert = #{userNumberExpert}
+		order by 1 desc limit 0, #{rowCount}
+	</select>
+	
+	<!-- 프로필 리뷰 개수 가져오기 -->
+	<select id="selectReviewCount" parameterType="_int" resultType="_int">
+		select count(consultReviewNumber) 
+		from tbl_consultreview
+		where userNumberExpert = #{userNumberExpert}
+	</select>
+	
+	<!-- 프로필 리스트 가격순 -->
+	<select id="selectProfilesPrice" resultType="expertProfileVO">
+		SELECT managerProfileNumber, managerName, managerPictureNameOrignal, 
+		managerProfileName, managerIntroduce, managerRank, managerCareer, 
+		managerDegree, managerContent1, managerContent2, managerContent3, 
+		managerconsultText, managerconsultVoice, managerconsultMeet, managerconsultDate, userNumberExpert
+		from tbl_managerprofile
+		order by field(managerRank, '2', '1') desc
+	</select>
+	
+	<!-- 상담 정보 가져오기 by MangerRank -->
+	<select id="selectConsult" parameterType="string" resultType="expertConsultVO">
+		select
+		consultNumber, consultRank, consultType, 
+		consultPrice1, consultSalePrice1, consultPrice2, consultSalePrice2, consultPrice3, consultSalePrice3
+		from tbl_consult
+		where consultRank = #{managerRank}
+	</select>
+	
+	<!-- 매니저 프로필 넘버 가져오기 by userNumberExpert -->
+	<select id="getProfileNumberByMangerNumber" parameterType="_int" resultType="_int">
+		select managerProfileNumber
+		from tbl_managerProfile
+		where userNumberExpert = #{userNumberExpert}
+	</select>
+	
+	<!-- 상담 결제 내역  -->
+	<insert id="insertConsultPaymentDetail" parameterType="consultPaymentDetailVO">
+		INSERT INTO tbl_consultpaymentdetail
+		(
+			consultType, consultTitle, consultStatus, userNumberExpert, userNumber, consultDate
+		)
+		VALUES(#{consultType}, #{consultTitle}, 0, #{userNumberExpert}, #{userNumber}, now());
+	</insert>
+	
+	<!-- 프로필 전체 개수  -->
+	<select id="getTotal" resultType="_int">
+		select count(managerProfileNumber) from tbl_managerProfile
+	</select>
+	
+	<!-- 프로필 전체 목록  -->
+	<select id="selectAll" parameterType="map" resultType="ExpertProfileDTO">
+		select mp.managerProfileNumber, mp.managerconsultDate, m.userEmail, m.userName,
+		mp.managerconsultText, mp.managerconsultVoice, mp.managerconsultMeet
+		from tbl_managerProfile mp join tbl_user m
+		on mp.userNumberExpert = m.userNumber
+		order by 1 desc limit #{startRow}, #{rowCount} 
+	</select>
+	
+	<!-- 프로필 수정 -->
+	<update id="update" parameterType="expertProfileVO">
+		update tbl_managerProfile
+		set 
+			managerName = #{managerName}, managerPictureNameOrignal = #{managerPictureNameOrignal}, 
+			managerProfileName = #{managerProfileName}, managerIntroduce = #{managerIntroduce}, 
+			managerRank = #{managerRank}, managerCareer = #{managerCareer}, managerDegree = #{managerDegree}, 
+			managerContent1 = #{managerContent1}, managerContent2 = #{managerContent2}, 
+			managerContent3 = #{managerContent3}, managerconsultText = #{managerconsultText}, 
+			managerconsultVoice = #{managerconsultVoice}, managerconsultMeet = #{managerconsultMeet}, managerconsultDate = now() 
+			where managerProfileNumber = #{managerProfileNumber}
+	</update>
+	
+	<!-- 프로필 사진 리스트 -->
+	<select id="selectPictures" resultType="expertProfileVO">
+		SELECT managerPictureNameOrignal, 
+		from tbl_managerprofile
+	</select>
+	
+	<!-- 상담 결제 내역  By managerProfileNumber -->
+	<delete id="deletePayment" parameterType="_int">
+		delete from tbl_consultPaymentDetail where userNumberExpert = #{userNumberExpert}
+	</delete>
+	
+	<!-- 프로필 삭제  By managerProfileNumber -->
+	<delete id="deleteProfile" parameterType="_int">
+		delete from tbl_managerProfile where managerProfileNumber = #{managerProfileNumber}
+	</delete>
+	
+	<!-- 프로필 중복 체크 By userNumberExpert-->
+	<select id="selectCountProfile" parameterType="_int" resultType="_int">
+		select count(managerProfileNumber) from tbl_managerProfile
+		where userNumberExpert = #{userNumberExpert}
+	</select>
+	
+	<!-- 유저 정보 가져오기 -->
+	<select id="selectUserAll" parameterType="_int" resultType="userVO">
+		select 
+			userNumber, userEmail, userPw, userName, 
+			userNickname, userGender, userAddress, userBirth, userHP
+		from tbl_user
+		where userNumber = #{userNumber}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+

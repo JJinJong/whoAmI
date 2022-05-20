@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http//mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserMyPage">
+<!-- 회원 정보 조회 -->
+   <select id="getInfo" parameterType="_int" resultType="UserVO">
+      select userNumber, userEmail, userPw, userName, userNickname, userGender, userAddress, userBirth 
+      from tbl_user where userNumber = #{userNumber}         
+   </select>
+
+<!-- 현재 비밀번호 검사 -->
+   <select id="checkPw" parameterType="string" resultType="_int">
+      select count(userPw) from tbl_user 
+      where userPw = #{userPw}
+   </select>
+   
+<!-- 로그인시 비밀번호 비밀번호 확인 -->
+<select id="userCheckPw" parameterType="string" resultType="_int">
+      select count(userPw) from tbl_user 
+      where userPw = #{userPw}
+   </select>
+   
+<!-- 회원정보 수정 -->
+   <update id="myPageUpdate" parameterType="UserVO">
+  		update tbl_user
+		set userNickname=#{userNickname}, userBirth=#{userBirth}, userGender=#{userGender}, userPw=#{userPw}, userAddress=#{userAddress}
+		where userNumber = #{userNumber}
+   </update>
+   
+   <!-- 심리상담 목록 -->
+    <select id="consultDetail" parameterType="_int" resultType="ConsultPaymentDetailDTO">
+      select m.userName, cpd.consultType, cpd.consultTitle, cpd.consultStatus, t.managerName, m.userHP 
+      from tbl_ConsultPaymentDetail cpd right join tbl_user m
+      on cpd.userNumber = m.userNumber
+      right join tbl_managerProfile t 
+      on cpd.userNumberExpert = t.userNumberExpert 
+      where m.userNumber = #{userNumber}
+   </select>
+   
+      <!-- 댓글 전체 목록  -->
+	<select id="selectAllComment" parameterType="_int" resultType="MyCommentVO">
+    select m.userNickName, b.worryCommentNumber, b.worryCommentContent, b.worryCommentDate, b.worryCommentLikeNumber,  b.worryNumber
+		from tbl_worryComment b left join tbl_user m
+		on  b.userNumber=m.userNumber 
+		where b.userNumber=#{userNumber}
+		order by 1   
+   </select> 
+   <!-- 댓글 하나가져오기 -->
+   <select id="selectComment" parameterType="_int" resultType="MyCommentVO">
+    select  worryCommentNumber,worryCommentContent, worryCommentDate, worryCommentLikeNumber, worryNumber
+		from tbl_worryComment 
+		where worryCommentNumber=#{worryCommentNumber}  
+   </select> 
+       <!-- 댓글 삭제  -->
+     <delete id="deleteComment" parameterType="_int">
+		delete from tbl_worryComment where worryCommentNumber = #{worryCommentNumber}
+	</delete>
+	<!-- 댓글 수정 -->
+	<update id="updateComment" parameterType="MyCommentVO" >
+		update tbl_worrycomment
+		set worryCommentContent=#{worryCommentContent}
+		where worryCommentNumber = #{worryCommentNumber}
+	</update>
+	<!-- 리뷰 전체 목록  -->
+	<select id="selectAllReview" parameterType="_int" resultType="ConsultReviewVO">
+    select m.userNickName, b.consultReviewNumber, b.consultReviewContent, b.consultReviewDate, b.userNumberExpert  
+		from tbl_consultreview b left join tbl_user m
+		on  b.userNumber=m.userNumber 
+		where b.userNumber=#{userNumber}
+		order by 1 desc 
+   </select> 
+   <!-- 리뷰 하나가져오기 -->
+   <select id="selectReview" parameterType="_int" resultType="ConsultReviewVO">
+    select consultReviewNumber, consultReviewContent, consultReviewDate, userNumberExpert
+		from tbl_consultReview 
+		where consultReviewNumber=#{consultReviewNumber}  
+   </select>
+    
+      <!--  리뷰 삭제  -->
+     <delete id="deleteReview" parameterType="_int">
+		delete from tbl_consultReview where consultReviewNumber = #{consultReviewNumber}
+	</delete>
+	<!-- 리뷰 수정 -->
+	<update id="updateReview" parameterType="ConsultReviewVO" >
+		update tbl_consultReview
+		set consultReviewNumber=#{consultReviewNumber},
+			consultReviewContent=#{consultReviewContent},
+		consultReviewDate=now()
+		
+		where consultReviewNumber = #{consultReviewNumber}
+	</update> 
+   
+</mapper>

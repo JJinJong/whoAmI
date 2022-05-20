@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http//mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Worry">
+<!-- 마이페이지 게시글 목록 -->
+	<select id="selectAllMyWorry" parameterType="_int" resultType="worryDTO">
+		select w.userNumber, w.worryNumber, w.worryTitle, w.worryContent, u.userNickname, 
+		w.worryDate, w.worryCategoryNumber,  w.worryLikeNumber
+		from tbl_worry w join tbl_user u 
+		on w.userNumber = u.userNumber
+		where w.userNumber= #{userNumber}
+		order by 1 desc;
+	</select>
+		<!-- 게시글 메인페이지목록 -->
+	<select id="selectAllMain" resultType="worryDTO">
+		select w.userNumber, worryNumber, worryTitle, worryContent, u.userNickname, worryDate, worryCategoryNumber, worryHashTag, worryLikeNumber
+		from tbl_worry w join tbl_user u on w.userNumber = u.userNumber
+		order by 1 desc limit 0, 3
+	</select>
+	<!-- 게시글 상세보기(전체 정보 조회) -->
+	<select id="selectDetail" parameterType="_int" resultType="worryDTO">
+		select worryNumber, worryCategoryNumber, worryTitle, worryContent, worryDate, b.userNumber, worryHashTag, userNickname 
+		from tbl_worry b join tbl_user m
+		on  b.userNumber = m.userNumber and worryNumber = #{worryNumber}
+	</select>
+	
+	<!-- 게시글 목록 -->
+	<select id="selectAll"  resultType="worryDTO">
+		select w.userNumber, worryNumber, worryTitle, worryContent, u.userNickname, worryDate, worryCategoryNumber, worryHashTag, worryLikeNumber
+		from tbl_worry w join tbl_user u 
+		on w.userNumber = u.userNumber
+		order by 1 desc
+	</select>
+	
+	<!-- 게시글 카테고리 목록 -->
+	<select id="selectCategoryAll" parameterType="map" resultType="worryDTO">
+		select w.userNumber, worryNumber, worryTitle, worryContent, u.userNickname, worryDate, worryCategoryNumber, worryHashTag, worryLikeNumber
+		from tbl_worry w join tbl_user u 
+		on w.userNumber = u.userNumber
+		where 1=1
+		 <if test="allTheStories != null">
+              and worryCategoryNumber
+          </if>
+		 <if test="generalConcern != null">
+              and worryCategoryNumber Like '1'
+          </if>
+          <if test="employment != null">
+              and worryCategoryNumber Like '2'
+          </if>
+          <if test="job != null">
+              and worryCategoryNumber Like '3'
+          </if>
+		 <if test="love != null">
+              and worryCategoryNumber Like '4'
+          </if>
+          <if test="sexualHarassment != null">
+              and worryCategoryNumber Like '5'
+          </if>
+          <if test="marriage != null">
+              and worryCategoryNumber Like '6'
+          </if>
+		 <if test="interpersonal != null">
+              and worryCategoryNumber Like '7'
+          </if>
+          <if test="apearance != null">
+              and worryCategoryNumber Like '8'
+          </if>
+          <if test="family != null">
+              and worryCategoryNumber Like '9'
+          </if>
+		 <if test="study != null">
+              and worryCategoryNumber Like '10'
+          </if>
+          <if test="money != null">
+              and worryCategoryNumber Like '11'
+          </if>
+          <if test="sexualLife != null">
+              and worryCategoryNumber Like '12'
+          </if>
+		 <if test="parting != null">
+              and worryCategoryNumber Like '13'
+          </if>
+          <if test="addiction != null">
+              and worryCategoryNumber Like '14'
+          </if>
+          <if test="body != null">
+              and worryCategoryNumber Like '15'
+          </if>
+		 <if test="mentalHealth != null">
+              and worryCategoryNumber Like '16'
+          </if>
+          <if test="LGBT != null">
+              and worryCategoryNumber Like '17'
+          </if>
+          <if test="ego != null">
+              and worryCategoryNumber Like '18'
+          </if>
+		 <if test="outcasting != null">
+              and worryCategoryNumber Like '19'
+          </if>
+          <if test="cheering != null">
+              and worryCategoryNumber Like '20'
+          </if>
+          <if test="freedom != null">
+              and worryCategoryNumber Like '21'
+          </if>
+		order by 1 desc
+	</select>
+	
+	  
+	<!-- 관리자 게시글  목록 -->
+	<select id="selectManagermentAll" parameterType="map"  resultType="worryManagermentDTO">
+		select worryNumber, worryTitle, worryContent, u.userEmail, worryDate, worryHashTag,w.userNumber
+		from tbl_worry w join tbl_user u 
+		on w.userNumber = u.userNumber
+		order by 1 desc limit #{startRow}, #{rowCount}
+	</select>
+	
+	<!-- 게시글 작성 -->
+	<insert id="insert" parameterType="worryVO">
+		insert into tbl_worry (worryCategoryNumber, worryNickNameCheck, worryReadMeCheck, worryTitle, worryContent,
+		worryHashTag, userNumber, worryDate, worryReportNumber, worryReadCount) 
+		values(#{worryCategoryNumber}, #{worryNickNameCheck}, #{worryReadMeCheck}, #{worryTitle}, #{worryContent},
+		#{worryHashTag}, #{userNumber}, now(), #{worryReportNumber}, #{worryReadCount})
+	</insert>
+	
+	<!-- 게시글 댓글 작성 -->
+	<insert id="commentinsert" parameterType="worryCommentVO">
+		insert into tbl_worryComment ( worryCommentContent, worryCommentDate, userNumber, worryNumber) 
+		values( #{worryCommentContent}, now(), #{userNumber}, #{worryNumber})
+	</insert>
+	
+	<!-- 게시글 전문가댓글 작성 -->
+	<insert id="commentManagerinsert" parameterType="worryCommentManagerVO">
+		insert into tbl_worryCommentManager( worryCommentManagerContent, managerNumberDate, userNumberExpert, worryNumber) 
+		values( #{worryCommentManagerContent}, now(), #{userNumberExpert}, #{worryNumber})
+	</insert>
+	
+	<!-- 게시글 댓글 목록 -->
+	<select id="selectCommentAll" parameterType="_int" resultType="WorryCommentDTO">
+    	select w.worryNumber, w.worryCommentContent, u.userNickname, w.worryCommentDate, u.userNumber
+		from tbl_worryComment w join tbl_user u
+		on  w.userNumber = u.userNumber 
+		where worryNumber = #{worryNumber}
+		order by 1 desc
+   </select>
+   
+    <!-- 게시글 전문가 댓글 목록 -->
+	<select id="selectManagerCommentAll" parameterType="map" resultType="worryCommentManagerDTO">
+    	select w.worryNumber, w.worryCommentManagerContent, w.userNumberExpert, w.managerNumberDate, m.managerPictureNameOrignal, m.managerName
+		from tbl_worryCommentManager w left join tbl_managerProfile m
+		on w.userNumberExpert = m.userNumberExpert
+		where w.worryNumber = #{worryNumber}
+   </select>
+	
+	<!-- 게시글 전체 개수  -->
+	<select id="getTotal" resultType="_int">
+		select count(worryNumber) from tbl_worry
+	</select>
+	
+	<!-- 게시글 전체 개수  -->
+	<select id="getCommentTotal" parameterType="_int" resultType="_int">
+		select count(worryNumber) from tbl_worryComment
+		where worryNumber = #{worryNumber}
+	</select>
+	
+	<!-- 게시글 수정 -->
+	<update id="update" parameterType="worryVO">
+		update tbl_worry
+		set worryTitle=#{worryTitle}, worryContent=#{worryContent}, worryCategoryNumber=#{worryCategoryNumber},
+		worryNickNameCheck=#{worryNickNameCheck}, worryReadMeCheck=#{worryReadMeCheck}, worryHashTag=#{worryHashTag} 
+		where worryNumber = #{worryNumber}
+	</update>
+	
+	 <!-- 댓글 삭제  -->
+     <delete id="deleteComment" parameterType="_int">
+		delete from tbl_worryComment where worryNumber = #{worryNumber}
+	</delete>
+	
+	 <!-- 전문가댓글 삭제  -->
+     <delete id="deleteManagerComment" parameterType="_int">
+		delete from tbl_worryCommentManager where worryNumber = #{worryNumber}
+	</delete>
+	
+	 <!-- 공감 삭제  -->
+     <delete id="deleteLike" parameterType="_int">
+		delete from tbl_worryLike where worryNumber = #{worryNumber}
+	</delete>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="delete" parameterType="_int">
+		delete from tbl_worry where worryNumber = #{worryNumber}
+	</delete>
+	
+	<!-- 공감수 업데이트 -->
+	<update id="updateWorryLikeNumber" parameterType="map">
+		update tbl_worry
+		set worryLikeNumber = worryLikeNumber + #{count}
+		where worryNumber = #{worryNumber}
+	</update>
+	
+	<!-- 해당 게시글의 좋아요 누른 회원 전체 목록 -->
+	<insert id="insertLikeUser" parameterType="map">
+		insert into tbl_worryLike (worryNumber, userNumber)
+		values(#{worryNumber}, #{userNumber})
+	</insert>
+	
+	<!-- 해당 게시글 좋아요 삭제 --> 
+	<delete id="deleteLikeUser" parameterType="map">
+		delete from tbl_worryLike 
+		where userNumber = #{userNumber} and worryNumber = #{worryNumber}
+	</delete>
+	
+	<!-- 카테고리이름 가져오기 byNumber-->
+	<select id="selectCategoryName" parameterType="_int" resultType="string">
+		select worryCategoryName from tbl_worryCategory
+		where worryCategoryNumber = #{worryCategoryNumber}
+	</select>
+	
+	<!-- 닉네임 비공개 나만보기  -->
+	
+	<!-- 공감수 가져오기-->
+	<select id="selectWorryLikeNumber" parameterType="_int" resultType="_int">
+		select worryLikeNumber from tbl_worry
+		where worryNumber = #{worryNumber}
+	</select>
+	
+	<!-- 좋아요 누른 회원 가져오기 -->
+	<select id="selectUserNumberLiked" parameterType="_int" resultType="_int">
+		select userNumber from tbl_worryLike
+		where worryNumber = #{worryNumber}
+	</select>
+</mapper>

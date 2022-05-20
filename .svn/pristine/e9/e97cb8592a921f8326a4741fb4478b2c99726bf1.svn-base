@@ -1,0 +1,49 @@
+/**
+ * 	프로필 리스트
+ */
+
+// 삭제시 로그인한 전문가와 글쓴 전문가 검사 
+var $deleteCheck = $('#deleteCheck');
+
+function deleteCheck() {
+	if($deleteCheck.val() == "1"){
+		$deleteCheck.val("");
+		alert("권한이 없습니다.");
+	}
+	
+	if($deleteCheck.val() == "2"){
+		$deleteCheck.val("");
+		alert("삭제 되었습니다.");
+	}
+};
+
+deleteCheck();
+
+
+// 수정시 로그인한 전문가와 글쓴 전문가 검사
+var $updateCheck = $('#updateCheck');
+console.log($updateCheck);
+
+function updateCheck() {
+	
+	console.log($updateCheck.val());
+	if($updateCheck.val() == "1"){
+		$updateCheck.val("");
+		alert("권한이 없습니다.");
+	}
+};
+
+updateCheck();
+
+// 수정시 로그인한 전문가와 글쓴 전문가 검사
+var $writeCheck = $('#writeCheck');
+
+function writeCheck() {
+	
+	if($writeCheck.val() == "1"){
+		$writeCheck.val("");
+		alert("이미 프로필을 작성하였습니다.");
+	}
+};
+
+writeCheck();

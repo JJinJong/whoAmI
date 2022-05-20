@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.whoAmI.managerExpert.vo.ExpertConsultVO" alias="ExpertConsultVO"/>
+		<typeAlias type="com.whoAmI.managerExpert.vo.ExpertProfileVO" alias="ExpertProfileVO"/>
+		<typeAlias type="com.whoAmI.managerExpert.vo.ConsultPaymentDetailVO" alias="ConsultPaymentDetailVO"/>
+		<typeAlias type="com.whoAmI.managerExpert.vo.ExpertProfileDTO" alias="ExpertProfileDTO"/>
+		<typeAlias type="com.whoAmI.managerExpert.vo.ConsultReviewDTO" alias="ConsultReviewDTO"/>
+		 <typeAlias type="com.whoAmI.managerMbti.vo.TestInfoVO" alias="TestInfoVO"/>
+      <typeAlias type="com.whoAmI.managerMbti.vo.TestInfoPictureVO" alias="TestInfoPictureVO"/>
+      <typeAlias type="com.whoAmI.user.vo.UserVO" alias="UserVO"/>
+      <typeAlias type="com.whoAmI.worry.vo.WorryVO" alias="worryVO"/>
+      <typeAlias type="com.whoAmI.worry.vo.WorryDTO" alias="worryDTO"/>
+      <typeAlias type="com.whoAmI.manager.vo.ManagerVO" alias="ManagerVO"/>
+      	<typeAlias type="com.whoAmI.diary.vo.DiaryVO" alias="DiaryVO"/>
+      	<typeAlias type="com.whoAmI.diary.vo.DiaryDTO" alias="DiaryDTO"/>
+      	<typeAlias type="com.whoAmI.admin.vo.AdminVO" alias="AdminVO"/>
+      	<typeAlias type="com.whoAmI.worry.vo.WorryLikeVO" alias="worryLikeVO"/>
+      	<typeAlias type="com.whoAmI.userMyPage.vo.ConsultPaymentDetailDTO" alias="ConsultPaymentDetailDTO"/>
+		<typeAlias type="com.whoAmI.worry.vo.WorryLikeVO" alias="worryLikeVO"/>
+      <typeAlias type="com.whoAmI.worry.vo.WorryCommentVO" alias="worryCommentVO"/>
+      <typeAlias type="com.whoAmI.worry.vo.WorryCommentDTO" alias="worryCommentDTO"/>
+      <typeAlias type="com.whoAmI.worry.vo.WorryCategoryVO" alias="WorryCategoryVO"/>
+      <typeAlias type="com.whoAmI.worry.vo.WorryManagermentDTO" alias="WorryManagermentDTO"/>
+      <typeAlias type="com.whoAmI.userMyPage.vo.MyCommentVO" alias="MyCommentVO"/>
+      <typeAlias type="com.whoAmI.userMyPage.vo.ConsultReviewVO" alias="ConsultReviewVO"/>
+      <typeAlias type="com.whoAmI.managerWorry.vo.WorryCommentManagerVO" alias="WorryCommentManagerVO"/>
+      <typeAlias type="com.whoAmI.managerWorry.vo.WorryCommentManagerDTO" alias="WorryCommentManagerDTO"/>
+	</typeAliases>
+
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+				<property name="url" value="jdbc:mysql://localhost:3306/whoami"/>
+				<property name="username" value="root"/>
+				<property name="password" value="1234"/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<mappers>
+		<mapper resource="com/whoAmI/mybatis/mapper/expert.xml"/>
+		 <mapper resource="com/whoAmI/mybatis/mapper/testInfo.xml"/>
+      <mapper resource="com/whoAmI/mybatis/mapper/testInfoPicture.xml"/>
+      <mapper resource="com/whoAmI/mybatis/mapper/user.xml"/>
+      <mapper resource="com/whoAmI/mybatis/mapper/worry.xml"/>
+      <mapper resource="com/whoAmI/mybatis/mapper/userMyPage.xml"/>
+      <mapper resource="com/whoAmI/mybatis/mapper/manager.xml"/>
+      <mapper resource="com/whoAmI/mybatis/mapper/diary.xml"/>
+      <mapper resource="com/whoAmI/mybatis/mapper/admin.xml"/>
+      <mapper resource="com/whoAmI/mybatis/mapper/expertPage.xml"/>
+	</mappers>
+	
+</configuration>

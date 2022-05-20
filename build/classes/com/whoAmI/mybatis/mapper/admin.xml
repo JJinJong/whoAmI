@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http//mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Admin">
+	<!-- 아이디 중복검사 -->
+	<select id="checkId" parameterType="string" resultType="_int">
+		select count(managerId) from tbl_manager
+		where managerId = #{managerId}
+		<!--입력받은 아이디와 비교 -->
+	</select>
+
+	<!-- 회원 가입 -->
+	<insert id="join" parameterType="AdminVO">
+		INSERT INTO whoami.tbl_manager
+		(managerName, managerId, managerPw, managerStatus)
+		VALUES(#{managerName}, #{managerId}, #{managerPw}, #{managerStatus});
+	</insert>
+
+	<!-- 로그인 -->
+	 <select id="login" parameterType="map" resultType="_int">
+		select
+		managerNumber from tbl_manager
+		where managerId=#{managerId} and
+		managerPw=#{managerPw}
+	</select> 
+	
+	<!--관리자 이름  표시-->
+	<select id="header" parameterType="string" resultType="String">
+		select
+		managerId from tbl_manager 
+		where managerId=#{managerId} 
+	</select>
+	
+
+	<!-- 회원 정보 조회 -->
+	<!-- <select id="getInfo" parameterType="_int" resultType="userVO">
+		select
+		memberId, memberPw, memberName, memberAge, memberGender, memberEmail,
+		memberZipcode, memberAddress, memberAddressDetail
+		from tbl_member where
+		memberNumber = #{memberNumber}
+	</select> -->
+	
+	
+	<!-- 총 회원수 -->
+	<select id="everyUser" resultType="_int">
+	select count(userNumber) from tbl_user;
+	</select>
+	
+	<!-- 남자 수 -->
+	<select id="everyMan" resultType="_int">
+	select count(userNumber) from tbl_user
+	where userGender = '남자';
+	</select>
+	
+	<!-- 여자 수 -->
+	<select id="everyWoman" resultType="_int">
+	select count(userNumber) from tbl_user
+	where userGender = '여자';
+	</select>
+	
+	<!-- 총 회원수 -->
+	<select id="allUser" resultType="_int">
+	select count(userNumber) from tbl_user
+	where userStatus = 0;
+	</select>
+	
+	<!-- 남자 수 -->
+	<select id="allMan" resultType="_int">
+	select count(userNumber) from tbl_user
+	where userStatus = 0 and userGender = '남자';
+	</select>
+	
+	<!-- 여자 수 -->
+	<select id="allWoman" resultType="_int">
+	select count(userNumber) from tbl_user
+	where userStatus = 0 and userGender = '여자';
+	</select>
+	
+	<!-- 총 전문가 수 -->
+	<select id="allExpert" resultType="_int">
+	select count(userNumber) from tbl_user
+	where userStatus = '1';
+	</select>
+	
+	<!-- 총 여자 전문가 수 -->
+	<select id="allWomanExpert" resultType="_int">
+	select count(userNumber) from tbl_user
+	where userStatus = '1' and userGender ='여자';
+	</select>
+	
+	<!-- 총 남자 전문가 수 -->
+	<select id="allManExpert" resultType="_int">
+	select count(userNumber) from tbl_user
+	where userStatus = '1' and userGender ='남자';
+	</select>
+	
+	<!-- 1급 자격증 전문가 수 -->
+	<select id="allFirstExpert" resultType="_int">
+	select count(managerProfileNumber) from tbl_managerprofile
+	where managerRank = 1;
+	</select>
+	
+	<!-- 2급 자격증 전문가 수 -->
+	<select id="allSecondExpert" resultType="_int">
+	select count(managerProfileNumber) from tbl_managerprofile
+	where managerRank = 2;
+	</select>
+	
+	<!-- 총 게시글 개수 -->
+	<select id="allWorry" resultType="_int">
+	select count(worryNumber) from tbl_worry;
+	</select>
+	
+	<!-- 총 남성글 개수 -->
+	<select id="allManWorry" resultType="_int">
+	select count(worryNumber) from tbl_worry w join tbl_user u
+	on u.userNumber = w.userNumber
+	where u.userGender = '남자';
+	</select>
+	
+	<!-- 총 여성글 개수 -->
+	<select id="allWomanWorry" resultType="_int">
+	select count(worryNumber) from tbl_worry w join tbl_user u
+	on u.userNumber = w.userNumber
+	where u.userGender = '여자';
+	</select>
+	
+	<!-- 총 가입수 -->
+	<select id="allJoin" resultType="_int">
+	select count(userNumber) from tbl_user;
+	</select>
+	
+	<!-- 총 결제 수 -->
+	<select id="allPay" resultType="_int">
+	select count(consultPaymentDetailNumber) from tbl_consultPaymentDetail;
+	</select>
+	
+	<!-- 총 후기 수 --> 
+	<select id="allReview"  resultType="_int">
+	select count(consultReviewNumber) from tbl_consultReview;
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,197 @@
+@charset "UTF-8";
+
+
+body{
+	color: #484848;
+}
+
+*{
+	box-sizing: border-box;
+    font-family: 'Spoqa Han Sans', sans-serif;
+    letter-spacing: -0.7px;
+}
+
+
+/*
+
+관리자 페이지 
+
+*/
+
+/*
+관리자 페이지 프로필 리스트 
+*/
+
+.managelist{
+	top: 30%;
+    left: 27%;
+    position: absolute;
+    width: 60%;
+    background: #ffffff;
+    border: solid 1px rgba(210, 215, 217, 0.75);
+    padding: 40px 50px;
+}
+
+.management_profileList caption{
+	text-align: left;
+	margin-bottom: 3%;
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.management_wrapper  table, .management_wrapper  table th{
+	table-layout: fixed;
+	text-align: center;
+}
+
+.management_wrapper table th:nth-child(6) {
+	text-align: right;
+}
+
+
+.management_wrapper table tr td:nth-child(6){
+	text-align: right;
+	font-size: 0.8em;
+}
+
+.management_wrapper table tbody tr{
+	background-color: #ffffff !important; 
+}
+
+/*
+관리자 페이지 메인페이지
+*/
+
+.DoyoonMaster {
+    top: 22%;
+    left: 29%;
+    position: absolute;
+    width: 913px;
+    background: #ffffff;
+    border: solid 1px rgba(210, 215, 217, 0.75);
+    padding: 40px 50px;
+}
+
+
+
+
+
+.aMain {
+        margin-top: -30px;
+        margin-left: 10px;
+    }
+    section {
+        display: block;
+        position: relative;
+        top: 0px;
+        width: 100%;
+        min-height: fit-content;
+        /* border: rgba(170, 170, 170, 0.562) solid 0.5px; */
+        border-top: rgba(170, 170, 170, 0.562) solid 0.5px !important;
+        margin-top: 30px;
+        z-index: 10;
+    }
+    .adminsWrapper {
+        position: relative;
+        width: 90%;
+        left: 5%;
+    }
+    hr {
+        margin: 0px;
+        width: 100%;
+        position: relative;
+        color: rgb(221, 221, 221);
+    }
+    .admin {
+        display: flex;
+        position: relative;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        min-height: 60px;
+        justify-content: space-between;
+        align-items: center;
+        border-top: rgb(221, 221, 221) solid 0.5px;
+        /* border-bottom: rgb(190, 190, 190) solid 1px; */
+        padding: 10px 0;
+        mask-border-width: 70%;
+    }
+    .aMain span {
+        display: inline-block;
+        position: relative;
+        left: 5%;
+        margin-bottom: 2%;
+    }
+    .aContents {
+        width: 60%;
+        height: 27px;
+        position: relative;
+        left: 2%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .aContents div a{
+        color: black !important;
+        font-weight: 600 !important;
+        font-size: 1.0rem;
+    }
+    .aContents div:first-child {
+        position: relative;
+        width: 20%;
+        height:100%;
+		text-align: center;
+        display: block;
+        margin: 0 5px;
+        top:0;
+    }
+    .aContents div:nth-child(2) {
+        position: relative;
+        width: 25%;
+        display: block;
+        text-align: center;
+        margin: 0 5px;
+        top:0;
+    }
+    .aContents div:last-child {
+        position: relative;
+        width: 25%;
+        display: block;
+        text-align: center;
+        margin: 0 5px;
+        top:0;
+    }
+    .aBtns {
+        width: 30%;
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+		text-align: center;
+        color: black;
+        font-size: 1.2rem;
+    }
+
+    div.aBtns .button {
+        padding: 0px 15px;
+        color: black !important;
+        margin: 15px 1%;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-weight: 500 !important;
+    }
+
+	div#sidebar > .inner {
+		width: 26em;
+	}
+
+	div#sidebar {
+		width: 26em !important;
+	}
+
+	div#wrapper {
+		flex-direction: row !important;
+	}
+
+
+
+
+

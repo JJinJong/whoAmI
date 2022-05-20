@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http//mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TestInfo">
+	
+	<!-- 게시글 전체 목록  -->
+	<select id="selectAll" parameterType="map" resultType="TestInfoVO">
+		select testInfoNumber, testInfoTitle, testInfoUsetime, testInfoPath  , testInfoDate
+		from tbl_testInfo
+		order by 1 desc limit #{startRow}, #{rowCount} 
+	</select>
+	<!-- 페이지 저체 게시글 전체 목록  -->
+	<select id="selectAllOnly" resultType="TestInfoVO">
+		select testInfoNumber, testInfoTitle, testInfoUsetime, testInfoPath  , testInfoDate
+		from tbl_testInfo
+		order by 1  
+	</select>
+	<!-- 게시글 전체 개수  -->
+	<select id="getTotal" resultType="_int">
+		select count(testInfoNumber) from tbl_testInfo
+	</select>
+	<!-- 게시글 상세보기(전체 정보 조회) -->
+	<select id="selectDetail" parameterType="_int" resultType="TestInfoVO">
+		select testInfoNumber, testInfoTitle, testInfoUsetime, testInfoPath 
+		from tbl_testInfo 
+	    where testInfoNumber = #{testInfoNumber}
+	</select>
+	<!-- 게시글 작성 -->
+	<insert id="insert" parameterType="TestInfoVO">
+		insert into tbl_testInfo (testInfoTitle , testInfoUsetime , testInfoPath, managerNumber,  testInfoDate) 
+		values(#{testInfoTitle}, #{testInfoUsetime}, #{testInfoPath},#{managerNumber}, now())
+	</insert>
+	<!-- 최근 게시글 번호 -->
+	<select id="getSeq" resultType="_int">
+		select testInfoNumber from tbl_testInfo
+		order by 1 desc limit 0, 1;
+	</select>
+	<!-- 게시글 삭제 -->
+	<delete id="delete" parameterType="_int">
+		delete from tbl_testInfo where testInfoNumber = #{testInfoNumber}
+	</delete>
+	<!-- 게시글 수정 -->
+	<update id="update" parameterType="TestInfoVO">
+		update tbl_testInfo 
+		set testInfoTitle=#{testInfoTitle},
+		 	testInfoUsetime=#{testInfoUsetime},	
+		 	testInfoPath=#{testInfoPath} 
+		where testInfoNumber=#{testInfoNumber}
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

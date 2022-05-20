@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http//mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Manager">
+	
+	
+	<!-- 전문가 리스트 조회 -->
+	<select id="selectAll" resultType="ManagerVO">
+		select 
+			managerNumber, managerID, managerPW, managerName, managerStatus
+		from tbl_manager where managerStatus = '0'
+	</select>
+
+ 	<!-- 전문가 수 -->
+ 	<select id="getTotal" resultType="_int">
+		select count(managerNumber) from tbl_manager
+		where managerStatus = '0'
+	</select> 
+	
+	<!-- 전문가, 관리자 삭제 -->
+	<delete id="deleteManager" parameterType="_int">
+		delete from tbl_manager where managerNumber = #{managerNumber}
+	</delete>
+
+	<!-- 관리자 리스트 조회 -->
+	<select id="selectManager1" resultType="ManagerVO">
+		select 
+			managerNumber, managerID, managerPW, managerName, managerStatus
+		from tbl_manager where managerStatus = '1' or managerStatus = '2'
+	</select>
+
+	<!-- 최고 관리자 리스트 조회 -->
+	<select id="selectManager2" resultType="ManagerVO">
+		select 
+			managerNumber, managerID, managerPW, managerName, managerStatus
+		from tbl_manager where managerStatus = '2'
+	</select>
+
+ 	<!-- 최고 관리자 수 -->
+ 	<select id="getTotalManager" resultType="_int">
+		select count(managerNumber) from tbl_manager
+		where managerStatus = '1' or managerStatus = '2'
+	</select> 
+
+	<!-- 회원 리스트 조회 -->
+	<select id="selectUserList" resultType="UserVO">
+		select userNumber, userEmail, userName
+		from tbl_user
+	</select>
+
+ 	<!-- 회원 수 -->
+ 	<select id="getTotalMember" resultType="_int">
+		select count(userNumber) from tbl_user
+	</select>
+
+ 	<!-- 전문가 디테일  -->
+ 	<select id="getManagerDetail" parameterType="_int" resultType="ManagerVO">
+		select managerNumber, managerId, managerName, managerStatus 
+		from tbl_manager where managerNumber = #{managerNumber}
+	</select>
+
+ 	<!-- 관리자 디테일  -->
+ 	<select id="getRealManagerDetail" parameterType="_int" resultType="ManagerVO">
+		select managerNumber, managerId, managerPW, managerName, managerStatus 
+		from tbl_manager where managerNumber = #{managerNumber}
+	</select>
+	
+</mapper>

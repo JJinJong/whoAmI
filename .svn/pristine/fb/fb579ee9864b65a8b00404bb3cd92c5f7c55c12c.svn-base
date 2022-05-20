@@ -1,0 +1,569 @@
+@import url(fontawesome-all.min.css);
+
+   * {
+        font-family: 'Spoqa Han sans', sans-serif;
+        letter-spacing: -0.7px;
+        box-sizing: border-box;
+    }
+    div {
+        display: block;
+    }
+
+    /* 본문 내용 */
+
+    body .page {
+        max-width: calc(1164px + 32px);
+        margin: 0 auto;
+        margin-top: 60px;
+        padding-left: 20px;
+    }
+    body div.body.head {
+        padding-bottom: 20px;
+        margin-top: 1px;
+    }
+    body div.body.mainTitle {
+        font-size: 1.5rem;
+        font-weight: 300;
+        color: #484848;
+        padding-top: 50px;
+        padding-bottom: 20px;
+    }
+    body div.body.header {
+        box-shadow: 0px 3px 6px 0 rgb(0 0 0 / 20%);
+        border-radius: 5px;
+        padding: 20px;
+        /* background-color: #fff; */
+        margin-bottom: 20px;
+        border-top: 10px solid #4b4d91;
+    }
+    body .TimerWrapper {
+        display: flex;
+        -webkit-box-pack: end;
+        color:gray; 
+        font-size: 1.2rem;
+        text-align: end;
+    }
+
+    body .headerTitle {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-size: 1.3rem;
+        padding: 20px 5px;
+        font-weight: 300;
+        line-height: 40px;
+        margin: 20px auto;
+    }
+
+    body .headerTitleMessage {
+        /* border-bottom: 1px solid rgb(170, 170, 170); */
+    }
+
+    .write {    
+        margin-left: 16px;
+        color: #4b4d91;
+        cursor: pointer;
+    }
+
+    .filterWrapper {
+        position: relateive;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100px;
+        padding: 10px;
+        margin: 0 10%;
+        margin-left: 0px;
+        display: flex;
+        flex-wrap: wrap;
+        -webkit-box-pack: center;
+        justify-content: flex-end;
+        }
+
+    .diaryFilter{
+    	position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        -webkit-box-pack: center;
+        justify-content: flex-end;
+        margin-left: 50%;
+        width: 50%;
+        height: 80%;
+    }
+
+    .colorSorts{
+        position: relative;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        padding: 3%;
+        display: flex;
+        flex-wrap: wrap;
+        -webkit-box-pack: center;
+        justify-content: flex-end;
+        padding-bottom: 10%;
+    }
+    
+    .colorSort {
+        position: relative;
+        transition: opacity 0.5s ease 0s, top;
+        width: 10%;
+        height: 10%;
+        padding-left: 2%;
+        padding-bottom: 10%;
+        overflow: hidden;
+        display: flex;
+        flex-wrap: wrap;
+        -webkit-box-pack: center;
+        justify-content: flex-end;
+    }
+
+    .color {
+        border: #fff solid;
+        width: 100%;
+        height: 100%;
+        border-radius: 100%;
+        /* border: black solid 1px;
+        border-width: 1px; */
+        padding: 47%;
+        cursor: pointer;
+    }
+
+    #pink{
+        background-color: pink;
+        background-size: 90% / 100%;
+    }
+    #red{
+        background-color: red;
+        background-size: 90% / 100%;
+    }
+    #orange{
+        background-color: orange;
+        background-size: 90% / 100%;
+    }
+    #yellow{
+        background-color: yellow;
+        background-size: 90% / 100%;
+    }
+    #green{
+        background-color: green;
+        background-size: 90% / 100%;
+    }
+    #skyblue{
+        background-color: skyblue;
+        background-size: 90% / 100%;
+    }
+    #blue{
+        background-color: blue;
+        background-size: 90% / 100%;
+    }
+    #purple{
+        background-color: purple;
+        background-size: 90% / 100%;
+    }
+    #gray{
+        background-color: gray;
+        background-size: 90% / 100%;
+    }
+    
+
+    .diariesWrapper {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        padding: 20px;
+        margin: 50px 20%;
+        display: flex;
+        justify-content: left;
+    }
+
+    .diaries {
+        display: flex;
+        flex-wrap: wrap;
+        /* -webkit-box-pack: center; */
+        /* justify-content: center; */
+        /* margin: 0 auto; */
+        margin-top: 30px;
+        margin-left: 0px;
+        border-top: rgb(235, 235, 235) solid 1px;
+        padding-top: 10px;
+    }
+    
+    .diaryWrapper {
+        position: relative;
+        transition: opacity 0.5s ease 0s, top;
+        width: 20%;
+        height: 30%;
+        padding-left: 5%;
+        padding-bottom: 27.25%;
+        overflow: hidden;
+        /* 이거 추가하면 가운데부터 쌓임 */
+        /* margin: 0 auto; */
+    }
+    
+    .diary {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        margin: 0 auto;
+        height: 100%;
+        padding: 20px;
+        display: flex;
+        
+        /* box-shadow: 0px 3px 6px 0 rgb(0 0 0 /50%); */
+    }
+    
+    
+    /* 사랑스러운 */
+    .diary > div.card1 {
+        width: 100%;
+        height: 100%;
+        background-color: #f15b89;
+        border-radius: 20px;
+        padding: 8% 5% 8% 5%;
+        margin: auto;
+        box-shadow: 0px 3px 6px 0 rgb(0 0 0 /30%);
+        opacity: 0.95;
+    }
+
+	/* 피곤한 */
+    .diary > div.card2 {
+        width: 100%;
+        height: 100%;
+        background-color: #048f4e;
+        border-radius: 20px;
+        padding: 8% 5% 8% 5%;
+        margin: auto;
+        box-shadow: 0px 3px 6px 0 rgb(0 0 0 /30%);
+        opacity: 0.95;
+    }
+
+	/* 용기있는 */
+    .diary > div.card3 {
+        width: 100%;
+        height: 100%;
+        background-color: #2f3293;
+        border-radius: 20px;
+        padding: 8% 5% 8% 5%;
+        margin: auto;
+        box-shadow: 0px 3px 6px 0 rgb(0 0 0 /30%);
+        opacity: 0.95;
+    }
+
+	/* 행복한 */
+    .diary > div.card4 {
+        width: 100%;
+        height: 100%;
+        background-color: #ff827e;
+        border-radius: 20px;
+        padding: 8% 5% 8% 5%;
+        margin: auto;
+        box-shadow: 0px 3px 6px 0 rgb(0 0 0 /30%);
+        opacity: 0.95;
+    }
+    
+	/* 화난 */
+    .diary > div.card5 {
+        width: 100%;
+        height: 100%;
+        background-color: #ef1c25;
+        border-radius: 20px;
+        padding: 8% 5% 8% 5%;
+        margin: auto;
+        box-shadow: 0px 3px 6px 0 rgb(0 0 0 /30%);
+        opacity: 0.95;
+    }
+
+	/* 자신있는 */
+    .diary > div.card6 {
+        width: 100%;
+        height: 100%;
+        background-color: #ffdf01;
+        border-radius: 20px;
+        padding: 8% 5% 8% 5%;
+        margin: auto;
+        box-shadow: 0px 3px 6px 0 rgb(0 0 0 /30%);
+        opacity: 0.95;
+    }
+
+	/* 불안한 */
+    .diary > div.card7 {
+        width: 100%;
+        height: 100%;
+        background-color: #828387;
+        border-radius: 20px;
+        padding: 8% 5% 8% 5%;
+        margin: auto;
+        box-shadow: 0px 3px 6px 0 rgb(0 0 0 /30%);
+        opacity: 0.95;
+    }
+
+	/* 기쁜 */
+    .diary > div.card8 {
+        width: 100%;
+        height: 100%;
+        background-color: #f47026;
+        border-radius: 20px;
+        padding: 8% 5% 8% 5%;
+        margin: auto;
+        box-shadow: 0px 3px 6px 0 rgb(0 0 0 /30%);
+        opacity: 0.92;
+    }
+
+	/* 미안한 */
+    .diary > div.card9 {
+        width: 100%;
+        height: 100%;
+        background-color: #d0c0cb;
+        border-radius: 20px;
+        padding: 8% 5% 8% 5%;
+        margin: auto;
+        box-shadow: 0px 3px 6px 0 rgb(0 0 0 /30%);
+        opacity: 0.92;
+    }
+
+	/* 좌절한 */
+    .diary > div.card10 {
+        width: 100%;
+        height: 100%;
+        background-color: #012639;
+        border-radius: 20px;
+        padding: 8% 5% 8% 5%;
+        margin: auto;
+        box-shadow: 0px 3px 6px 0 rgb(0 0 0 /30%);
+        opacity: 0.92;
+    }
+    
+    /* 감동적인 */
+    .diary > div.card11 {
+        width: 100%;
+        height: 100%;
+        background-color: #fba981;
+        border-radius: 20px;
+        padding: 8% 5% 8% 5%;
+        margin: auto;
+        box-shadow: 0px 3px 6px 0 rgb(0 0 0 /30%);
+        opacity: 0.95;
+    }
+
+	/* 안타까운 */
+    .diary > div.card12 {
+        width: 100%;
+        height: 100%;
+        background-color: #aa996e;
+        border-radius: 20px;
+        padding: 8% 5% 8% 5%;
+        margin: auto;
+        box-shadow: 0px 3px 6px 0 rgb(0 0 0 /30%);
+        opacity: 0.92;
+    }
+
+	/* 편안한 */ 
+    .diary > div.card13 {
+        width: 100%;
+        height: 100%;
+        background-color: #ffe4a5;
+        border-radius: 20px;
+        padding: 8% 5% 8% 5%;
+        margin: auto;
+        box-shadow: 0px 3px 6px 0 rgb(0 0 0 /30%);
+        opacity: 0.95;
+    }
+
+	/* 놀라운 */    
+    .diary > div.card14 {
+        width: 100%;
+        height: 100%;
+        background-color: #93969b;
+        border-radius: 20px;
+        padding: 8% 5% 8% 5%;
+        margin: auto;
+        box-shadow: 0px 3px 6px 0 rgb(0 0 0 /30%);
+        opacity: 0.95;
+    }
+    
+    .diaryHeader {
+        display: flex;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+        align-items: center;
+        width: 90%;
+        position: relative;
+    }
+    
+    .card {
+        position: relative;
+        transition: opacity 0.5s ease 0s, top;
+        width: 100%;
+        height: 70%;
+        padding: 8% 15% 8% 10%;
+        display: flex;
+        flex-direction: column;
+        opacity: 0.8;
+        cursor: pointer;
+    }
+    
+    .card1 > div.card1 {
+        background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FG8RA3%2FbtrvClzxVL7%2FZgVfvAMQrCTne78zpCBhF0%2Fimg.jpg");
+        background-size: cover;
+        background-repeat: no-repeat
+    }
+    .card2 > div.card2 {
+        background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkE8gd%2Fbtrvy2U47Gy%2FfoWIqxk8yniM8WRG5Cz540%2Fimg.jpg");
+        background-size: cover;
+        background-repeat: no-repeat
+    }
+    .card3 > div.card3 {
+        background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbokwOs%2FbtrvBls2fek%2FrCN2f1B9DQTTdOhnGB5z5K%2Fimg.jpg");
+        background-size: cover;
+        background-repeat: no-repeat
+    }
+    .card4 > div.card4 {
+        background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FMnabk%2FbtrvylHiDOL%2FwWIKIYkpFTcktJLr7gqPl0%2Fimg.jpg");
+        background-size: cover;
+        background-repeat: no-repeat
+    }
+    .card5 > div.card5 {
+        background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FlNR9a%2FbtrvDQy31GE%2F6zJYNSbyQV90k4yZoWMrK0%2Fimg.jpg");
+        background-size: cover;
+        background-repeat: no-repeat
+    }
+    .card6 > div.card6 {
+        background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FYy3ZA%2Fbtrvxlgtm7Y%2FHDsa3u8pzdhX3Gb8lI3NLK%2Fimg.jpg");
+        background-size: cover;
+        background-repeat: no-repeat
+    }
+    .card7 > div.card7 {
+        background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FT0L0T%2FbtrvCmd8a3t%2FrCRJNq0s56bwIAz2MX1yZK%2Fimg.jpg");
+        background-size: cover;
+        background-repeat: no-repeat
+    }
+    .card8 > div.card8 {
+        background: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F6yDmw%2FbtrvBkOrMap%2FmQm4a9hUwBuahaDqXV6VUk%2Fimg.jpg");
+        background-size: cover;
+        background-repeat: no-repeat
+    }
+    .card9 > div.card9 {
+        background: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb87VlL%2FbtrvBl0SfKb%2FVAkOQewIod7Y0lXAwWcMI0%2Fimg.jpg");
+        background-size: cover;
+        background-repeat: no-repeat
+    }
+    .card10 > div.card10 {
+        background: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fcj5TYS%2FbtrvCnxnHbU%2FWgawmYVqpf2POKJsSflpk0%2Fimg.jpg");
+        background-size: cover;
+        background-repeat: no-repeat
+    }
+    .card11 > div.card11 {
+        background: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FlNmXH%2Fbtrvy2U47xD%2F6T4DTajcJ7VTUXmFgU84K1%2Fimg.jpg");
+        background-size: cover;
+        background-repeat: no-repeat
+    }
+    .card12 > div.card12 {
+        background: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FmfZ3q%2FbtrvDgSjdGA%2FKS4nVMx9qRcBK1WiWuHdvk%2Fimg.jpg");
+        background-size: cover;
+        background-repeat: no-repeat
+    }
+    .card13 > div.card13 {
+        background: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fq1yQ6%2FbtrvAbRJffa%2FEFpAsCQI9fFAIr5qS5ihY1%2Fimg.jpg");
+        background-size: cover;
+        background-repeat: no-repeat
+    }
+    .card14 > div.card14 {
+        background: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbjxA5n%2FbtrvAa6lxMJ%2FWCKWaMlkn7rQ8mLNbC60u0%2Fimg.jpg");
+        background-size: cover;
+        background-repeat: no-repeat
+    }
+    
+    .nickname {
+        cursor: pointer;
+        font-size: 14px;
+        /* font-family: "Yeon Sung", cursive; */
+        padding: 4px 8px;
+    }
+    
+    .diaryHeaderActions {
+        -webkit-box-flex: 0;
+        flex-grow: 0;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+    }
+
+    .diaryHeaderActionLike {
+        display: flex;
+        -webkit-box-pack: end;
+        justify-content: flex-end;
+    }
+
+    .diaryHeaderActionLike img {
+        cursor: pointer;
+        width: 14px;
+        height: 14px;
+        border: 0px;
+    }
+
+    .likeCount {
+        margin-left: 2px;
+        font-size: 12px;
+    }
+
+    .diaryHeaderActionReport {
+        cursor: pointer;
+        width: 14px;
+        height: 12px;
+        margin-left: 8px;
+        margin-right: -10px;
+        display: flex;
+    }
+
+    .emotionWrapper {
+        position: relative;
+        padding-bottom: 20px;
+        height: 20%;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+    .emotion {
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        padding: 5%;
+        width: 80%;
+        border-radius: 5px;
+        box-shadow: 0px 3px 6px 0 rgb(0 0 0 /10%);
+        font-size: smaller;
+        font-weight: 600;
+        opacity: 0.94;
+    }
+
+    .triangle {
+        width: 8px;
+        height: 0px;
+        border-top:8px solid none;
+        border-bottom:8px solid white;
+        border-right: 8px solid transparent;
+        border-left: 8px solid  transparent;
+        margin: auto;
+        opacity: 0.94;
+    }
+
+    .q2, .a2 {
+        margin-top: 0%;
+        text-align: center;
+        visibility: hidden;
+        opacity: 100%;
+    }
+    .a2 {
+        margin-top: 50%;
+        font-weight: 600;
+    }
+    
+    p.a2 > a {
+    	color: black !important;
+    }
+    

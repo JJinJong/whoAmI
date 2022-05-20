@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http//mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="User">
+	<!-- 아이디 중복검사 -->
+	<select id="checkId" parameterType="string" resultType="_int">
+		select count(userEmail) from tbl_user
+		where userEmail = #{userEmail}
+		<!--입력받은 아이디와 비교 -->
+	</select>
+
+	<!-- 회원 가입 -->
+	<insert id="join" parameterType="UserVO">
+		INSERT INTO whoami.tbl_user
+		(userEmail, userPw, userName, userNickname, userGender,userZipcode, userAddress, userAddressDetail, userBirth, userHP, kakaoEmail)
+		VALUES(#{userEmail},#{userPw}, #{userName}, #{userNickname}, #{userGender}, #{userZipcode}, #{userAddress}, #{userAddressDetail}, #{userBirth},#{userHP},#{kakaoEmail});
+	</insert>
+		<!-- hex(aes_encrypt(#{userPw},'abc')) -->
+
+	<!-- 카카오로그인 시 회원의 로그인 정보 조회 -->
+	<select id="kakaoLogin" parameterType="string" resultType="UserVO">
+		select userEmail, userPw from tbl_user 
+		where kakaoEmail = #{kakaoEmail}
+	</select>
+
+	<!-- 로그인 -->
+	<select id="login" parameterType="map" resultType="_int">
+		select
+		userNumber from tbl_user 
+		where userEmail=#{userEmail} and
+		userPw=#{userPw}
+	</select>
+		<!-- userPw=hex(aes_encrypt(#{userPw},'abc')) -->
+	
+	<!--이메일 상단 표시-->
+	<select id="header" parameterType="string" resultType="String">
+		select
+		userEmail from tbl_user 
+		where userEmail=#{userEmail} 
+	</select>
+	
+	<!-- 비밀번호 재설정 -->
+	<update id="update" parameterType="map">
+		update tbl_user
+		set userPw=#{userPw}
+		where userEmail=#{userEmail}
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+

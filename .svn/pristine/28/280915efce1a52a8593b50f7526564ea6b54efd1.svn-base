@@ -1,0 +1,16 @@
+@charset "UTF-8";
+/* 메인화면 컨트롤  */
+
+/* 감정 일기 달력  */
+#calendarC {
+   display: none;
+}
+
+#MyStroyC {
+	display: none;
+}
+
+
+#MyReviewC {
+	display: none;
+}
